@@ -139,7 +139,19 @@ namespace pupmyconema.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            var _registerViewModel = new RegisterViewModel();
+            _registerViewModel.AccessTypeCollection = new System.Collections.Generic.Dictionary<int, string>
+            {
+                { 0, "System Administrator" },
+                { 1, "Administrator" },
+                { 2, "Data Bank Administrator" },
+                { 3, "Content Management" },
+                { 4, "Student" },
+                { 5, "Faculty Member/Instructor" },
+                { 6, "Researcher" },
+                { 7, "Professional" },
+            };
+            return View(_registerViewModel);
         }
 
         //
@@ -389,7 +401,7 @@ namespace pupmyconema.Controllers
         // POST: /Account/LogOff
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult LogOff()
+        public ActionResult LogOut()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");

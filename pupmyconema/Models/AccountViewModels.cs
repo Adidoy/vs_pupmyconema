@@ -64,9 +64,15 @@ namespace pupmyconema.Models
 
     public class RegisterViewModel
     {
+        public Dictionary<int, string> AccessTypeCollection = new Dictionary<int, string>();
+
         [Required]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
+
+        [Required]
+        [Display(Name = "Access Type")]
+        public int AccessType { get; set; }
 
         [Required]
         [EmailAddress]
