@@ -140,17 +140,18 @@ namespace pupmyconema.Controllers
         public ActionResult Register()
         {
             var _registerViewModel = new RegisterViewModel();
-            _registerViewModel.AccessTypeCollection = new System.Collections.Generic.Dictionary<int, string>
+            _registerViewModel.AccessTypeCollection = new System.Collections.Generic.List<SelectListItem>
             {
-                { 0, "System Administrator" },
-                { 1, "Administrator" },
-                { 2, "Data Bank Administrator" },
-                { 3, "Content Management" },
-                { 4, "Student" },
-                { 5, "Faculty Member/Instructor" },
-                { 6, "Researcher" },
-                { 7, "Professional" },
+                new SelectListItem { Value = "0", Text = "System Administrator"  },
+                new SelectListItem { Value = "1", Text = "Administrator"  },
+                new SelectListItem { Value = "2", Text = "Data Bank Administrator"  },
+                new SelectListItem { Value = "3", Text = "Content Manager"  },
+                new SelectListItem { Value = "4", Text = "Student"  },
+                new SelectListItem { Value = "5", Text = "Faculty Member / Instructor"  },
+                new SelectListItem { Value = "6", Text = "Researcher"  },
+                new SelectListItem { Value = "7", Text = "Professional"  },
             };
+            
             return View(_registerViewModel);
         }
 
@@ -163,7 +164,14 @@ namespace pupmyconema.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser {
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Institution = model.Institution,
+                    Designation = model.Designation,
+                    UserName = model.Username,
+                    Email = model.Email
+                };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

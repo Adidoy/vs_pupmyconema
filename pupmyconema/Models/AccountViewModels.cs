@@ -64,15 +64,28 @@ namespace pupmyconema.Models
 
     public class RegisterViewModel
     {
-        public Dictionary<int, string> AccessTypeCollection = new Dictionary<int, string>();
+        public List<System.Web.Mvc.SelectListItem> AccessTypeCollection = new List<System.Web.Mvc.SelectListItem>();
+
+        [Required]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
 
         [Required]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
         [Required]
-        [Display(Name = "Access Type")]
-        public int AccessType { get; set; }
+        [Display(Name = "Institution")]
+        public string Institution { get; set; }
+
+        [Required]
+        [Display(Name = "Designation")]
+        public int Designation { get; set; }
+
+        [Required]
+        [Display(Name = "Username")]
+        public string Username { get; set; }
+
 
         [Required]
         [EmailAddress]
