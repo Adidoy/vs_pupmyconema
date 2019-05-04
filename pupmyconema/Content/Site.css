@@ -15,7 +15,6 @@
 
 .banner {
     background-color:#021215;
-    height:105px;
     width:100%;
     color: white;
     vertical-align:middle;
@@ -37,8 +36,8 @@
 }
 .banner img {
     margin-top:12px;
-    height:6vw; 
-    width:6vw;
+    height:80%; 
+    width:80%;
 }
 .navbar {
     padding:0px;

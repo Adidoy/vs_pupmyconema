@@ -17,11 +17,5 @@ namespace pupmyconema.Models
         {
             return new ApplicationDbContext();
         }
-        
-        public DbSet <Taxon> Taxons
-        {
-            get;
-            set;
-        }
     }
 }
