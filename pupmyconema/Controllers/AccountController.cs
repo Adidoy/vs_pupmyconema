@@ -9,6 +9,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using pupmyconema.Models;
+using System.Data.SqlClient;
+using System.Data.Entity.Infrastructure;
 
 namespace pupmyconema.Controllers
 {
@@ -79,7 +81,14 @@ namespace pupmyconema.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    TempData["Message"] = "Welcome, " + model.Username + "! You have successfully logged in.";
+                    ApplicationDbContext _appCtx = new ApplicationDbContext();
+                    var _user = _appCtx.Users.Where(u => u.UserName == model.Username).Single();
+                    TempData["FullName"] = _user.UserName + " " + _user.LastName;
+                    TempData["Message"] = "Welcome, " + _user.FirstName + "! You have successfully logged in.";
+                    if (_user.Designation <= 3)
+                    {
+                        return RedirectToAction("Dashboard", "admin/adminhome");
+                    }
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -413,7 +422,8 @@ namespace pupmyconema.Controllers
         public ActionResult LogOut()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            Session.Clear();
+            return RedirectToAction("Index", "Home", new { area = "" });
         }
 
         //

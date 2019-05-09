@@ -18,4 +18,14 @@ namespace pupmyconema.Models
             return new ApplicationDbContext();
         }
     }
+
+    public class AccountsContext : DbContext
+    {
+        public AccountsContext()
+            : base("DefaultConnection")
+        {
+        }
+
+        public DbSet<ApplicationUser> Users { get; set; }
+    }
 }

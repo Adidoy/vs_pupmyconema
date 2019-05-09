@@ -12,14 +12,14 @@ namespace pupmyconema.Areas.Admin
             }
         }
 
-        public override void RegisterArea(AreaRegistrationContext context) 
+        public override void RegisterArea(AreaRegistrationContext context)
         {
             context.Routes.LowercaseUrls = true;
             context.MapRoute(
-                name: "admin_default",
+                name: "areaRoute",
                 url: "admin/{controller}/{action}/{id}",
                 //new { action = "Index", id = UrlParameter.Optional }
-                defaults: new { controller = "AdminHome", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "AdminHome", action = "Dashboard", id = UrlParameter.Optional } 
             );
         }
     }
